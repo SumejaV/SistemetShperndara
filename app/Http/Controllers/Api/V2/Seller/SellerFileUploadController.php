@@ -225,9 +225,9 @@ class SellerFileUploadController extends Controller
             }
             $new_file_array[] = $file;
         }
-        // dd($new_file_array);
+     
         return $new_file_array;
-        // return $files;
+       
     }
 
     public function all_file()
@@ -256,7 +256,7 @@ class SellerFileUploadController extends Controller
         return back();
     }
 
-    //Download project attachment
+    
     public function attachment_download($id)
     {
         $project_attachment = Upload::find($id);
@@ -268,7 +268,7 @@ class SellerFileUploadController extends Controller
             return back();
         }
     }
-    //Download project attachment
+    
     public function file_info(Request $request)
     {
         $file = Upload::findOrFail($request['id']);
