@@ -114,7 +114,7 @@ class ProductController extends Controller
         ]));
         $request->merge(['product_id' => $product->id]);
 
-        ///Product categories
+        ///Kategoria e produktit
         $product->categories()->attach($request->category_ids);
 
 
@@ -125,12 +125,12 @@ class ProductController extends Controller
             ]));
         }
 
-        //Product Stock
+        //Produkti ne stok
         $this->productStockService->store($request->only([
             'colors_active', 'colors', 'choice_no', 'unit_price', 'sku', 'current_stock', 'product_id'
         ]), $product);
 
-        // Frequently Bought Products
+        // produktet e blera me shpesh(frequently)
         $this->frequentlyBoughtProductService->store($request->only([
             'product_id', 'frequently_bought_selection_type', 'fq_bought_product_ids', 'fq_bought_product_category_id'
         ]));
@@ -163,26 +163,26 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, Product $product)
     {
-        //Product
+        //Produkti
         $product = $this->productService->update($request->except([
             '_token', 'sku', 'choice', 'tax_id', 'tax', 'tax_type', 'flash_deal_id', 'flash_discount', 'flash_discount_type'
         ]), $product);
 
-        //Product Stock
+        //Produkti ne Stok
         foreach ($product->stocks as $key => $stock) {
             $stock->delete();
         }
         $request->merge(['product_id' => $product->id]);
 
-        //Product categories
+        //kategoria e produktit
         $product->categories()->sync($request->category_ids);
 
-        //Product Stock
+        //Produkti ne Stok
         $this->productStockService->store($request->only([
             'colors_active', 'colors', 'choice_no', 'unit_price', 'sku', 'current_stock', 'product_id'
         ]), $product);
 
-        // Frequently Bought Products
+       
         $product->frequently_bought_products()->delete();
         $this->frequentlyBoughtProductService->store($request->only([
             'product_id', 'frequently_bought_selection_type', 'fq_bought_product_ids', 'fq_bought_product_category_id'
@@ -262,7 +262,7 @@ class ProductController extends Controller
             }
         }
 
-        //Product
+        //Produkti
         $product_new = (new ProductService)->product_duplicate_store($product);
 
         //Store in Product Stock Table
@@ -271,7 +271,6 @@ class ProductController extends Controller
         //Store in Product Tax Table
         (new ProductTaxService)->product_duplicate_store($product->taxes, $product_new);
 
-        // Product Categories
         foreach($product_new->product_categories as $product_category){
             ProductCategory::insert([
                 'product_id' => $product_new->id,
