@@ -56,10 +56,10 @@ class DigitalProductController extends Controller
 
         $request->merge(['product_id' => $product->id, 'current_stock' => 0]);
 
-        ///Product categories
+        ///Kategoria e produktit
         $product->categories()->attach($request->category_ids);
 
-        //Product Stock
+        //Produkti ne stok 
         (new ProductStockService)->store($request->only([
             'unit_price', 'current_stock', 'product_id'
         ]), $product);
@@ -70,7 +70,7 @@ class DigitalProductController extends Controller
                 'tax_id', 'tax', 'tax_type', 'product_id'
             ]));
         }
-        // Frequently Bought Products
+        // produktet e blera me shpesh (frequently)
         (new FrequentlyBoughtProductService)->store($request->only([
             'product_id', 'frequently_bought_selection_type', 'fq_bought_product_ids', 'fq_bought_product_category_id'
         ]));
@@ -99,14 +99,14 @@ class DigitalProductController extends Controller
             '_token', 'tax_id', 'tax', 'tax_type'
         ]), $product);
 
-        //Product Stock
+        //Produkti ne stok
         foreach ($product->stocks as $key => $stock) {
             $stock->delete();
         }
 
         $request->merge(['product_id' => $product->id, 'current_stock' => 0]);
 
-        //Product categories
+        //kategoria e produktit 
         $product->categories()->sync($request->category_ids);
 
 
