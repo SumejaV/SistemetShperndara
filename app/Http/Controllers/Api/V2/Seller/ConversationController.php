@@ -12,11 +12,7 @@ use App\Models\Message;
 
 class ConversationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
         if (BusinessSetting::where('type', 'conversation_system')->first()->value == 1) {
@@ -47,12 +43,7 @@ class ConversationController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
     {
         $conversation = Conversation::findOrFail(decrypt($id));
@@ -77,12 +68,7 @@ class ConversationController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         $conversation = Conversation::findOrFail(decrypt($id));
