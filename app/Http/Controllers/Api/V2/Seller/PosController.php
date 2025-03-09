@@ -26,6 +26,8 @@ class PosController extends Controller
         ]);
     }
 
+
+    
     public function getCustomers()
     {
         $customers = User::where('user_type', 'customer')->where('email_verified_at', '!=', null)->orderBy('created_at', 'desc')->get();
@@ -53,6 +55,9 @@ class PosController extends Controller
                 PosUtility::updatePosUserCartData($carts, null, $sessionTemUserId);
             }
         }
+
+
+        
 
         return response()->json([
             'result' => true,
