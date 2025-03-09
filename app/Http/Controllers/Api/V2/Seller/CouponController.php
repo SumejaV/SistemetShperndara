@@ -11,23 +11,14 @@ use App\Models\Product;
 
 class CouponController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $coupons = Coupon::where('user_id', auth()->user()->id)->orderBy('id','desc')->get();
         return CouponResource::collection($coupons);
     }
     
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(CouponRequest $request)
     {
         $user_id = auth()->user()->id;
@@ -38,37 +29,21 @@ class CouponController extends Controller
         return $this->success(translate('Coupon has been saved successfully'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function edit($id)
     {
         $coupon = Coupon::where('id', $id)->where('user_id', auth()->user()->id)->first();
         return new CouponResource($coupon);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(CouponRequest $request, Coupon $coupon)
     {
         $coupon->update($request->validated());
         return $this->success(translate('Coupon has been updated successfully'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         Coupon::where('id', '=', $id)->where('user_id', auth()->user()->id)->delete();
