@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V2\Seller;
 
+
 use App\Http\Requests\CouponRequest;
 use App\Http\Resources\V2\Seller\CouponResource;
 use App\Http\Resources\V2\Seller\ProductCollection;
