@@ -54,7 +54,7 @@ class EarningReportController extends Controller
                                 ->get();
         $total_customer_subscriptions_earning = CustomerPackagePayment::where('approval', 1)->sum('amount');
 
-        // Payouts data
+        // Datat e pageses
         $seller_payments = Payment::groupBy('time')->where('payment_method','!=','Seller paid to admin')
                         ->select(DB::raw('SUM(amount) as total'), DB::raw('DATE_FORMAT(created_at, "%M") AS time'))
                         ->whereYear('created_at', Carbon::now()->year)
@@ -86,7 +86,7 @@ class EarningReportController extends Controller
         }
         $mymonths = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
         foreach ($mymonths as $month) {
-            // Sales
+            // Shitjet
             $sale_stat_data['time'] = $month;
             $sale_stat_data['total'] = 0;
 
@@ -108,7 +108,7 @@ class EarningReportController extends Controller
             $sale_stat_data['formatted_price'] = single_price($sale_stat_data['total']);
             $sale_data[] = $sale_stat_data;
 
-            //Payouts
+            //Pagesat
             $payout_stat_data['time'] = $month;
             $payout_stat_data['total'] = 0;
 
@@ -133,7 +133,7 @@ class EarningReportController extends Controller
         $data['sales_stat'] = $sale_data;
         $data['payout_stat'] = $payout_data;
 
-        // Total sale Alltime and This month Sales
+        // Totali i te gjitha shitjeve dhe te ketij muaji 
         $sales_this_month = 0;
         foreach($data['sales_stat'] as $sale){
             if($sale['time'] == date('F'))
@@ -141,9 +141,9 @@ class EarningReportController extends Controller
         }
         $data['total_sales_alltime'] = $total_product_sale_earning + $total_seller_subscriptions_earning + $total_customer_subscriptions_earning;
         $data['sales_this_month'] = $sales_this_month;
-        // Total sale Alltime and This month Sales end
+        
 
-        // Total payouts and This month payouts
+        // Totali i pagesave te gjithe muajve dhe te ketij muaji 
         $payout_this_month = 0;
         foreach($data['payout_stat'] as $payout){
 
@@ -152,9 +152,9 @@ class EarningReportController extends Controller
         }
         $data['total_payouts'] = $total_seller_payment_amount + $total_refund_amount + $total_delivery_boy_payment_amount;
         $data['payout_this_month'] = $payout_this_month;
-        // Total payouts and This month payouts end
+        
 
-        // Category wise Report
+        // Category  Report
         $data['total_categories'] = Category::count();
         $data['top_categories'] = Product::select('categories.name', 'categories.id', DB::raw('SUM(grand_total) as total'))
             ->leftJoin('order_details', 'order_details.product_id', '=', 'products.id')
@@ -201,7 +201,7 @@ class EarningReportController extends Controller
         $commission_query = $commission_query->select(DB::raw('SUM(admin_commission) as total_commission'))->first();
         $data['commission'] = $commission_query->total_commission;
 
-        // Earning from delivery
+        // Fitimi nga  delivery
         $delivery_cost_query = OrderDetail::query();
         $delivery_cost_query->select(DB::raw('SUM(shipping_cost) as total'))->where('delivery_status', 'delivered');
         if ($intervalType == 'DAY') {
@@ -256,11 +256,11 @@ class EarningReportController extends Controller
         return $data;
     }
 
-    // payouts
+    // pagesat
     public function payouts(Request $request)
     {
         $intervalType = $request->interval_type;
-        // Seller payout
+        // pagesat e shitesit 
         $seller_payout = Payment::where('payment_method','!=','Seller paid to admin');
         if ($intervalType == 'DAY') {
             $seller_payout->whereDate('created_at', Carbon::today());
@@ -272,7 +272,7 @@ class EarningReportController extends Controller
         $seller_payout->select(DB::raw('SUM(amount) as total_payout'));
         $data['seller_payout'] = $seller_payout->first()->total_payout;
 
-        // Refund Amount
+        // shuma e rimburesuar 
         $refund_amount = 0;
         if (addon_is_activated('refund_request')) {
             $refund_request = RefundRequest::where('admin_approval', 1);
@@ -308,11 +308,11 @@ class EarningReportController extends Controller
         return $data;
     }
 
-    // Sale Analytic
+    // shitjet analitike 
     function sale_analytic(Request $request)
     {
         $intervalType = $request->interval_type;
-        // product Sale Analytics
+        // produkti dhe shitjet analitike 
         $order_query = Order::where('delivery_status', 'delivered')->groupBy('time')->whereYear('created_at', Carbon::now()->year);
         if($intervalType == 'MONTH'){
             $order_query->select(DB::raw('SUM(grand_total) as total'), DB::raw('DATE_FORMAT(created_at, "%M") AS time'));
