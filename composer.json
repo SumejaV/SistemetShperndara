@@ -1,4 +1,5 @@
 {
+
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
@@ -45,6 +46,7 @@
         "twilio/sdk": "^6.44",
         "unicodeveloper/laravel-paystack": "^1.0"
     },
+
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",
         "barryvdh/laravel-ide-helper": "^2.13",
@@ -55,6 +57,7 @@
         "phpunit/phpunit": "^10.0",
         "spatie/laravel-ignition": "^2.0"
     },
+
     "autoload": {
         "classmap": [
             "database/seeds",
@@ -65,17 +68,20 @@
         },
         "files": ["app/Http/Helpers.php"]
     },
+
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
         }
     },
+
     "extra": {
         "laravel": {
             "dont-discover": [
             ]
         }
     },
+
     "scripts": {
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -88,6 +94,7 @@
             "@php artisan package:discover --ansi"
         ]
     },
+
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
@@ -96,6 +103,8 @@
             "symfony/thanks": true
         }
     },
+
     "minimum-stability": "stable",
     "prefer-stable": true
 }
+
