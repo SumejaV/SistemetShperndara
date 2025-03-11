@@ -16,14 +16,19 @@
     <meta name="app-url" content="{{ getBaseURL() }}">
     <meta name="file-base-url" content="{{ getFileBaseURL() }}">
 
+    <!-- Titulli i faqes -->
+
     <title>@yield('meta_title', get_setting('website_name') . ' | ' . get_setting('site_motto'))</title>
 
+    <!-- Meta informacione te tjera -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
     <meta name="description" content="@yield('meta_description', get_setting('meta_description'))" />
     <meta name="keywords" content="@yield('meta_keywords', get_setting('meta_keywords'))">
 
+    
+    <!-- Lidhjet e tjera meta dhe te dhena te rrjeteve sociale -->
     @yield('meta')
 
     @if (!isset($detailedProduct) && !isset($customer_product) && !isset($shop) && !isset($page) && !isset($blog))
@@ -60,12 +65,12 @@
     <link rel="icon" href="{{ $site_icon }}">
     <link rel="apple-touch-icon" href="{{ $site_icon }}">
 
-    <!-- Google Fonts -->
+    <!-- Lidhje per Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-    <!-- CSS Files -->
+    <!-- Lidhjet per stilet CSS -->
     <link rel="stylesheet" href="{{ static_asset('assets/css/vendors.css') }}">
     @if ($rtl == 1)
         <link rel="stylesheet" href="{{ static_asset('assets/css/bootstrap-rtl.min.css') }}">
@@ -73,7 +78,9 @@
     <link rel="stylesheet" href="{{ static_asset('assets/css/aiz-core.css?v=') }}{{ rand(1000, 9999) }}">
     <link rel="stylesheet" href="{{ static_asset('assets/css/custom-style.css') }}">
 
+    
 
+    <!-- JavaScript per nderveprim lokal -->
     <script>
         var AIZ = AIZ || {};
         AIZ.local = {
@@ -99,7 +106,8 @@
             files: '{{ translate('Files') }}',
         }
     </script>
-
+    
+    <!-- Stilet per ngjyrat dhe dizajnin -->
     <style>
         :root{
             --blue: #3490f3;
@@ -212,7 +220,7 @@
 
 </head>
 <body>
-    <!-- aiz-main-wrapper -->
+    <!-- Pjesa kryesore e faqes -->
     <div class="aiz-main-wrapper d-flex flex-column bg-white">
         @php
             $user = auth()->user();
