@@ -22,12 +22,12 @@
             $availability = "in stock";
         }
     @endphp
-    <!-- Schema.org markup for Google+ -->
+    
     <meta itemprop="name" content="{{ $detailedProduct->meta_title }}">
     <meta itemprop="description" content="{{ $detailedProduct->meta_description }}">
     <meta itemprop="image" content="{{ uploaded_asset($detailedProduct->meta_img) }}">
 
-    <!-- Twitter Card data -->
+    
     <meta name="twitter:card" content="product">
     <meta name="twitter:site" content="@publisher_handle">
     <meta name="twitter:title" content="{{ $detailedProduct->meta_title }}">
@@ -98,12 +98,14 @@
                        </div>
                     </div>
 
-                    <!-- Right side -->
+
+                    
                     <div class="col-lg-9">
                         
                         <!-- Reviews & Ratings -->
                         @include('frontend.product_details.review_section')
 
+                        
                         <!-- Description, Video, Downloads -->
                         @include('frontend.product_details.description')
                         
@@ -144,6 +146,8 @@
 @endsection
 
 @section('modal')
+
+
     <!-- Image Modal -->
     <div class="modal fade" id="image_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -166,6 +170,8 @@
         </div>
     </div>
 
+
+
     <!-- Chat Modal -->
     <div class="modal fade" id="chat_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -179,6 +185,8 @@
                 </div>
                 <form class="" action="{{ route('conversations.store') }}" method="POST"
                     enctype="multipart/form-data">
+
+                    
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $detailedProduct->id }}">
                     <div class="modal-body gry-bg px-3 pt-3">
@@ -237,9 +245,11 @@
                 </div>
             </div>
         </div>
+
     @endif
     
     <!-- Product Review Modal -->
+
     <div class="modal fade" id="product-review-modal">
         <div class="modal-dialog">
             <div class="modal-content" id="product-review-modal-content">
