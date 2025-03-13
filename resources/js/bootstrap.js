@@ -12,7 +12,7 @@ try {
 
 
 
-
+// Ngarkon Axios per dergimin e kerkesave HTTP
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
