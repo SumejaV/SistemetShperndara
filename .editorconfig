@@ -1,15 +1,24 @@
+# Ky skedar është rrënjësor (root) dhe nuk do të kërkojë cilësime nga prindërit
 root = true
 
+# Rregullat që zbatohen për të gjitha skedarët (*)
 [*]
-charset = utf-8
-end_of_line = lf
-insert_final_newline = true
-indent_style = space
-indent_size = 4
-trim_trailing_whitespace = true
+charset = utf-8                  # Karakteret do të përdorin encoding UTF-8
+end_of_line = lf                  # Fundi i rreshtave do të përdorë "line feed" (LF) në vend të CRLF
+insert_final_newline = true        # Shton një rresht të ri në fund të skedarit nëse mungon
+indent_style = space               # Përdor hapësira në vend të tab-eve për indentim
+indent_size = 4                    # Madhësia e indentimit është 4 hapësira
+trim_trailing_whitespace = true    # Hiq hapësirat boshe në fund të rreshtave
 
+
+# Rregull specifik për skedarët Markdown (*.md)
 [*.md]
-trim_trailing_whitespace = false
+trim_trailing_whitespace = false   # Në skedarët Markdown, nuk hiqen hapësirat boshe në fund të rreshtave
+                                   # (Kjo ndihmon për ruajtjen e formatimit në disa raste)
 
+# Rregull specifik për skedarët YAML (*.yml)
 [*.yml]
-indent_size = 2
+indent_size = 2  # Në skedarët YAML, indentimi bëhet me 2 hapësira
+
+
+
