@@ -22,7 +22,7 @@
         </div>
     </section>
 
-    <!-- All Brands -->
+    <!-- të gjitha Brands -->
     <section class="mb-4">
         <div class="container">
             <div class="bg-white px-3 pt-3">
